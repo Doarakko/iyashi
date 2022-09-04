@@ -14,18 +14,10 @@ If you have a heroku account, you can use it without coding.
 
 We need "iyashi", let's get "iyashi"!
 
-## Demo
-
-I prepared slack workspace for demo.
-
-Feel free to use.
-
-[Slack workspace for demo](https://join.slack.com/t/iyashihq/shared_invite/zt-jt999y5v-zcuB5o1aEl3rLEZD~_pRMQ)
-
 ## Requirements
 
 - Heroku account
-- Slack bot token
+- Slack
 
 You need to invite slack bot to the channel you want "iyashi".
 
@@ -67,7 +59,7 @@ Please create an issue if you have any animals you would like to see supported!
 ## Run on local
 
 ```sh
-docker-compose up
+docker-compose up --build
 ```
 
 ### Add file manually
