@@ -1,4 +1,6 @@
 import io
+import os
+from time import time
 
 import requests
 import torch
@@ -7,8 +9,6 @@ import torchvision
 from PIL import Image
 from torch.nn import functional as F
 from torchvision import transforms
-
-from slackbot_settings import API_TOKEN
 
 DOG = "dog"
 CAT = "cat"
@@ -61,8 +61,9 @@ def predict(url):
     try:
         responce = requests.get(
             url,
-            headers={"Authorization": "Bearer {}".format(API_TOKEN)},
+            headers={"Authorization": f'Bearer {os.environ["SLACK_BOT_TOKEN"]}'},
             stream=True,
+            timeout=5,
         )
         img = Image.open(io.BytesIO(responce.content)).convert("RGB")
 

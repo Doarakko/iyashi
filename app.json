@@ -16,13 +16,17 @@
             "description": "Do not change this value.",
             "value": "app"
         },
+        "SLACK_APP_TOKEN": {
+            "description": "Enter your slack app token.",
+            "value": "xapp-xxxx"
+        },
         "SLACK_BOT_TOKEN": {
             "description": "Enter your slack bot token.",
-            "value": "abcdefgh"
+            "value": "xoxb-yyyy"
         },
         "IMAGE_UPLOADED_CHANNEL": {
-            "description": "Please enter the channel name where photos would be posted.",
-            "value": "pet"
+            "description": "Please enter the channel id where photos would be posted.",
+            "value": "C0XXXX"
         }
     },
     "buildpacks": [
