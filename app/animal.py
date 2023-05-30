@@ -55,7 +55,7 @@ def _predict(img):
             os.environ["ANIMAL_PREDICTION_API"],
             headers={
                 "Prediction-Key": os.environ["ANIMAL_PREDICTION_API_KEY"],
-                "Content-Type": 'application/octet-stream'
+                "Content-Type": "application/octet-stream",
             },
             timeout=5,
             data=img,
