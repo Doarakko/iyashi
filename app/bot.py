@@ -33,7 +33,7 @@ def iyashi(say):
         say(NO_PICTURE_MESSAGE)
 
 
-@app.message("^(cat|nyan|にゃーん|ニャーン)$")
+@app.message("^(にゃーん|ニャーン)$")
 def cat(say):
     try:
         row = file.get_by_animal(animal.CAT)
@@ -42,7 +42,7 @@ def cat(say):
         say(NO_PICTURE_MESSAGE)
 
 
-@app.message("^(dog|wanwan|わんわん|ワンワン)$")
+@app.message("^(わんわん|ワンワン)$")
 def dog(say):
     try:
         row = file.get_by_animal(animal.DOG)
@@ -51,7 +51,7 @@ def dog(say):
         say(NO_PICTURE_MESSAGE)
 
 
-@app.message("^(chinchilla|チンチラ|ちんちら)$")
+@app.message("^(チンチラ|ちんちら)$")
 def chinchilla(say):
     try:
         row = file.get_by_animal(animal.CHINCHILLA)
@@ -60,7 +60,7 @@ def chinchilla(say):
         say(NO_PICTURE_MESSAGE)
 
 
-@app.message("^(hedgehog|ハリネズミ|はりねずみ)$")
+@app.message("^(ハリネズミ|はりねずみ)$")
 def hedgehog(say):
     try:
         row = file.get_by_animal(animal.HEDGEHOG)
@@ -69,7 +69,7 @@ def hedgehog(say):
         say(NO_PICTURE_MESSAGE)
 
 
-@app.message("^(owl|フクロウ|ふくろう|ほーほー|ホーホー)$")
+@app.message("^(フクロウ|ふくろう|ほーほー|ホーホー)$")
 def owl(say):
     try:
         row = file.get_by_animal(animal.OWL)
@@ -80,14 +80,21 @@ def owl(say):
 
 @app.event("file_shared")
 def post(body, client, say):
-    if body["event"]["channel_id"] != os.environ["IMAGE_UPLOADED_CHANNEL"]:
+    channel_id = body["event"]["channel_id"]
+    if channel_id != os.environ["IMAGE_UPLOADED_CHANNEL"]:
         return
 
     res = client.files_info(file=body["event"]["file_id"])
     label = animal.predict(res["file"]["url_private_download"])
     file.add(res["file"]["permalink"], label)
 
-    say(f":{animal.get_emoji(label)}:")
+    shares = res["file"]["shares"]
+    for i in shares["private"].keys():
+        res = client.reactions_add(
+                channel=channel_id,
+                name=label,
+                timestamp=shares["private"][i][0]["ts"]
+        )
 
 
 if __name__ == "__main__":
