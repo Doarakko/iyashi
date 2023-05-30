@@ -1,4 +1,4 @@
-FROM python:3.8
+FROM python:3.9
 
 COPY ./poetry.lock /app/poetry.lock
 COPY ./pyproject.toml /app/pyproject.toml

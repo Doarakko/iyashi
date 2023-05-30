@@ -18,6 +18,7 @@ We need "iyashi", let's get "iyashi"!
 
 - Heroku account
 - Slack
+- Microsoft Azure Custom Vision API
 
 You need to invite slack bot to the channel you want "iyashi".
 
