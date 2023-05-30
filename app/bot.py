@@ -91,9 +91,7 @@ def post(body, client, say):
     shares = res["file"]["shares"]
     for i in shares["private"].keys():
         res = client.reactions_add(
-                channel=channel_id,
-                name=label,
-                timestamp=shares["private"][i][0]["ts"]
+            channel=channel_id, name=label, timestamp=shares["private"][i][0]["ts"]
         )
 
 
