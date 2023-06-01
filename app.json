@@ -7,7 +7,6 @@
         "slack bot",
         "machine learning",
         "image recognition",
-        "pytorch",
         "slack api",
         "deep learning"
     ],
@@ -48,9 +47,6 @@
         {
             "url": "https://github.com/heroku/heroku-buildpack-python"
         }
-    ],
-    "addons": [
-        "heroku-postgresql"
     ],
     "formation": {
         "worker": {
