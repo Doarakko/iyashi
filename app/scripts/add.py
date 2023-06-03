@@ -10,7 +10,7 @@ from file import File
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("-u", help="url")
-    parser.add_argument("-a", help="animal", choices=animal.CLASS_NAMES)
+    parser.add_argument("-a", help="animal")
     args = parser.parse_args()
 
     Database.initialise()

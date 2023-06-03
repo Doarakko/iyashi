@@ -3,7 +3,6 @@ import os
 from time import time
 
 import requests
-from PIL import Image
 
 DOG = "dog"
 CAT = "cat"
@@ -62,6 +61,6 @@ def _predict(img):
         )
         json = responce.json()
 
-        return get_emoji(json["predictions"][0]["tagName"])
+        return json["predictions"][0]["tagName"]
     except Exception as e:
         print(e)

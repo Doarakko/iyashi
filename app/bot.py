@@ -79,20 +79,31 @@ def owl(say):
 
 
 @app.event("file_shared")
-def post(body, client, say):
+def post(body, client):
     channel_id = body["event"]["channel_id"]
     if channel_id != os.environ["IMAGE_UPLOADED_CHANNEL"]:
         return
 
     res = client.files_info(file=body["event"]["file_id"])
-    label = animal.predict(res["file"]["url_private_download"])
-    file.add(res["file"]["permalink"], label)
 
     shares = res["file"]["shares"]
-    for i in shares["private"].keys():
-        res = client.reactions_add(
-            channel=channel_id, name=label, timestamp=shares["private"][i][0]["ts"]
-        )
+    if "public" not in shares:
+        return
+    
+    message_ts = ""
+    for i in shares["public"].keys():
+        message_ts = shares["public"][i][0]["ts"]
+        break
+
+    permalink_res = client.chat_getPermalink(channel=channel_id, message_ts=message_ts)
+    permalink = permalink_res["permalink"]
+
+    label = animal.predict(res["file"]["url_private_download"])
+    file.add(permalink, label)
+
+    res = client.reactions_add(
+        channel=channel_id, name=animal.get_emoji(label), timestamp=message_ts
+    )
 
 
 if __name__ == "__main__":
