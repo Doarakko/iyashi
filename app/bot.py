@@ -89,7 +89,7 @@ def post(body, client):
     shares = res["file"]["shares"]
     if "public" not in shares:
         return
-    
+
     message_ts = ""
     for i in shares["public"].keys():
         message_ts = shares["public"][i][0]["ts"]
